@@ -1,0 +1,62 @@
+body {
+  background-color: #f34c43;
+}
+
+.jumbotron-title {
+  font-size: 80px;
+  font-family: "Libre Baskerville", serif;
+}
+
+.jumbotron-smaller-text {
+  font-size: 36px;
+  font-family: "Libre Baskerville", serif;
+}
+
+.button {
+  font-size: 32px;
+  border-radius: 20px;
+  padding-right: 18px;
+  padding-left: 18px;
+  font-family: "Libre Baskerville", serif;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  color: black;
+  background-color: black;
+}
+
+.about-title {
+  font-family: "Libre Baskerville", serif;
+  text-align: center;
+  font-weight: bold;
+}
+
+.about-paragraph {
+  margin-top: 2%;
+  margin-right: 6%;
+  margin-left: 6%;
+  font-family: "Libre Baskerville", serif;
+  text-align: center;
+}
+
+.about-hot-rest-container {
+  background-color: #f34c43 !important;
+}
+
+.current-reservations-container {
+  margin-left: 5%;
+  margin-right: 5%;
+  text-align: center;
+}
+
+.waiting-list-container {
+  margin-left: 5%;
+  margin-right: 5%;
+  text-align: center;
+}
+
+#clear {
+  margin-top: 2%;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tables Page</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4 jumbotron-title">Hot Restaurant</h1>
+        <hr />
+        <p class="lead jumbotron-smaller-text">
+          Current Reservations and Wait List
+        </p>
+        <a href="/makeReservation"
+          ><button type="button" class="btn btn-danger">
+            Make Reservation
+          </button></a
+        >
+        <a href="/index"
+          ><button type="button" class="btn btn-secondary">Home</button></a
+        >
+      </div>
+    </div>
+    <div class="card current-reservations-container">
+      <div class="card-header">
+        Current Reservations
+      </div>
+      <div class="card-body current-reservations-content"></div>
+    </div>
+    <br />
+    <div class="card waiting-list-container">
+      <div class="card-header">
+        Waiting List
+      </div>
+      <div class="card-body waiting-list-content"></div>
+    </div>
+    <p><a href="#" id="clear">Clear Table</a></p>
+
+    <script type="text/javascript">
+      function tableQuery() {
+        $.get("/api/viewTables", function(tableInformation) {
+          console.log(tableInformation);
+          for (var i = 0; i < tableInformation.length; i++) {
+            var tableSection = $("<div>");
+            tableSection.addClass("well");
+            tableSection.attr("id", "tableWell-" + i + 1);
+            $(".current-reservations-content").append(tableSection);
+            var tableNumber = i + 1;
+            $("#tableWell-" + i + 1).append(
+              '<h2><span class="label label-primary">' +
+                tableNumber +
+                "</span> | " +
+                tableInformation[i].customerID +
+                "</h2>"
+            );
+          }
+        });
+      }
+
+      function waitlistQuery() {
+        $.get("/api/waitlist", function(waitlistData) {
+          for (var i = 0; i < waitlistData.length; i++) {
+            var waitlistSection = $("<div>");
+            waitlistSection.addClass("well");
+            waitlistSection.attr("id", "waitlistWell-" + i + 1);
+            $(".current-waitlist-content").append(waitlistSection);
+            var tableNumber = i + 1;
+            $("#waitlistWell-" + i + 1).append(
+              '<h2><span class="label label-primary">' +
+                tableNumber +
+                "</span> | " +
+                waitlistData[i].customerID +
+                "</h2>"
+            );
+          }
+        });
+      }
+
+      function clear() {
+        $.get("/api/clear");
+      }
+      $("#clear").on("click", function() {
+        alert("Clearing...");
+        clear();
+        location.reload();
+      });
+
+      tableQuery();
+      waitlistQuery();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Reservation Page</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4 jumbotron-title">Hot Restaurant</h1>
+        <hr />
+        <p class="lead jumbotron-smaller-text">
+          Make your reservation!
+        </p>
+        <a href="/viewTables"
+          ><button type="button" class="btn btn-primary">View Tables</button></a>
+          <a href="/index.html"
+          ><button type="button" class="btn btn-secondary">Home</button></a>
+      </div>
+    </div>
+
+    <div
+      class="card border-secondary mb-3 questions-container"
+      style="max-width: 18rem;"
+    >
+      <div class="card-header">Table Reservation</div>
+      <div class="card-body text-secondary questions-form">
+        <form>
+          <div class="form-group questions-email">
+            <label for="exampleInputEmail1">Name</label>
+            <input
+              type="name"
+              class="form-control"
+              id="questions-name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Phone Number</label>
+            <input
+              type="password"
+              class="form-control"
+              id="questions-phone"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Email Address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="questions-email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Unique ID</label>
+            <input
+              type="password"
+              class="form-control"
+              id="questions-id"
+            />
+          </div>
+          </div>
+          <button type="submit" class="btn btn-primary submit-button">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+        $(".submit-button").on("click", function(event){
+        event.preventDefault();
+		var newReservation = {
+			customerName: $('#questions-name').val().trim(),
+			phoneNumber: $('#questions-phone').val().trim(),
+			email: $('#questions-email').val().trim(),
+			customerID: $('#questions-id').val().trim()
+        };
+        $.post("/api/new", newReservation).
+	    then(function(data){
+            console.log(data);
+	    	if(data){
+	    		alert("Yay! You are officially booked!")
+	    	}
+	    	// If a table is available... tell user they on the waiting list.
+	    	if(data === false){
+	    		alert("Sorry you are on the wait list")
+	    	}
+	    	// Clear the form when submitting
+    		$('#reserve_name').val("");
+			$('#reserve_phone').val("");
+			$('#reserve_email').val("");
+			$('#reserve_uniqueID').val("");
+	    });
+return false;
+});
+
+    </script>
+  </body>
+</html>

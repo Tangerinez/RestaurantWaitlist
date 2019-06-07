@@ -1,0 +1,25 @@
+{
+  "name": "RestaurantWaitlist",
+  "version": "1.0.0",
+  "description": "Small full-stack application with the idea that user's can make a reservation at a hot restaurant",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tangerinez/RestaurantWaitlist.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tangerinez/RestaurantWaitlist/issues"
+  },
+  "homepage": "https://github.com/Tangerinez/RestaurantWaitlist#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "path": "^0.12.7"
+  }
+}
